@@ -10,7 +10,7 @@ import (
 	"bufio"
 	"bytes"
 	"context"
-	tls "github.com/Carcraftz/utls"
+	tls "github.com/katangensis/utls"
 	"encoding/base64"
 	"errors"
 	"fmt"
@@ -25,7 +25,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/davidlinketech/fhttp/httptrace"
+	"github.com/katangensis/fhttp/httptrace"
 
 	"golang.org/x/net/idna"
 )

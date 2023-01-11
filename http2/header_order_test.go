@@ -2,11 +2,12 @@ package http2
 
 import (
 	"bytes"
-	http "github.com/davidlinketech/fhttp"
-	"github.com/davidlinketech/fhttp/httptrace"
 	"log"
 	"strings"
 	"testing"
+
+	http "github.com/katangensis/fhttp"
+	"github.com/katangensis/fhttp/httptrace"
 )
 
 func TestHeaderOrder(t *testing.T) {

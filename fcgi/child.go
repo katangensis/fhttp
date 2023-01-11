@@ -17,8 +17,8 @@ import (
 	"sync"
 	"time"
 
-	http "github.com/davidlinketech/fhttp"
-	"github.com/davidlinketech/fhttp/cgi"
+	http "github.com/katangensis/fhttp"
+	"github.com/katangensis/fhttp/cgi"
 )
 
 // request holds the state for an in-progress request. As soon as it's complete,

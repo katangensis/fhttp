@@ -13,12 +13,10 @@
 // See https://http2.github.io/ for more information on HTTP/2.
 //
 // See https://http2.golang.org/ for a test server running this code.
-//
 package http2
 
 import (
 	"bufio"
-	tls "github.com/Carcraftz/utls"
 	"fmt"
 	"io"
 	"os"
@@ -27,7 +25,9 @@ import (
 	"strings"
 	"sync"
 
-	http "github.com/davidlinketech/fhttp"
+	tls "github.com/katangensis/utls"
+
+	http "github.com/katangensis/fhttp"
 
 	"golang.org/x/net/http/httpguts"
 )
@@ -141,10 +141,10 @@ func (s Setting) Valid() error {
 type SettingID uint16
 
 const (
-	SettingHeaderTableSize      SettingID = 0x4			//0x1
-	SettingMaxConcurrentStreams SettingID = 0x1			//0x3
-	SettingInitialWindowSize    SettingID = 0x6			//0x4
-	SettingMaxHeaderListSize    SettingID = 0x3			//0x6
+	SettingHeaderTableSize      SettingID = 0x4 //0x1
+	SettingMaxConcurrentStreams SettingID = 0x1 //0x3
+	SettingInitialWindowSize    SettingID = 0x6 //0x4
+	SettingMaxHeaderListSize    SettingID = 0x3 //0x6
 )
 
 var settingName = map[SettingID]string{
@@ -165,10 +165,11 @@ func (s SettingID) String() string {
 // name (key). See httpguts.ValidHeaderName for the base rules.
 //
 // Further, http2 says:
-//   "Just as in HTTP/1.x, header field names are strings of ASCII
-//   characters that are compared in a case-insensitive
-//   fashion. However, header field names MUST be converted to
-//   lowercase prior to their encoding in HTTP/2. "
+//
+//	"Just as in HTTP/1.x, header field names are strings of ASCII
+//	characters that are compared in a case-insensitive
+//	fashion. However, header field names MUST be converted to
+//	lowercase prior to their encoding in HTTP/2. "
 func validWireHeaderFieldName(v string) bool {
 	if len(v) == 0 {
 		return false
@@ -354,8 +355,8 @@ func (s *sorter) SortStrings(ss []string) {
 // validPseudoPath reports whether v is a valid :path pseudo-header
 // value. It must be either:
 //
-//     *) a non-empty string starting with '/'
-//     *) the string '*', for OPTIONS requests.
+//	*) a non-empty string starting with '/'
+//	*) the string '*', for OPTIONS requests.
 //
 // For now this is only used a quick check for deciding when to clean
 // up Opaque URLs before sending requests from the Transport.

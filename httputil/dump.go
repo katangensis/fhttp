@@ -15,7 +15,7 @@ import (
 	"strings"
 	"time"
 
-	http "github.com/davidlinketech/fhttp"
+	http "github.com/katangensis/fhttp"
 )
 
 // drainBody reads all of b to memory and then returns two equivalent

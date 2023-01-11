@@ -13,7 +13,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/davidlinketech/fhttp/internal/testenv"
+	"github.com/katangensis/fhttp/internal/testenv"
 )
 
 func TestForeachHeaderElement(t *testing.T) {

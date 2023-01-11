@@ -29,7 +29,6 @@ import (
 	"bufio"
 	"bytes"
 	"context"
-	tls "github.com/Carcraftz/utls"
 	"errors"
 	"fmt"
 	"io"
@@ -46,8 +45,10 @@ import (
 	"sync"
 	"time"
 
-	http "github.com/davidlinketech/fhttp"
-	"github.com/davidlinketech/fhttp/http2/hpack"
+	tls "github.com/katangensis/utls"
+
+	http "github.com/katangensis/fhttp"
+	"github.com/katangensis/fhttp/http2/hpack"
 
 	"golang.org/x/net/http/httpguts"
 )
@@ -2510,8 +2511,9 @@ func (rws *responseWriterState) writeChunk(p []byte) (n int, err error) {
 // prior to the headers being written. If the set of trailers is fixed
 // or known before the header is written, the normal Go trailers mechanism
 // is preferred:
-//    https://golang.org/pkg/net/http/#ResponseWriter
-//    https://golang.org/pkg/net/http/#example_ResponseWriter_trailers
+//
+//	https://golang.org/pkg/net/http/#ResponseWriter
+//	https://golang.org/pkg/net/http/#example_ResponseWriter_trailers
 const TrailerPrefix = "Trailer:"
 
 // promoteUndeclaredTrailers permits http.Handlers to set trailers

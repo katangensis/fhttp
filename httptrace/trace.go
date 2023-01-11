@@ -8,13 +8,14 @@ package httptrace
 
 import (
 	"context"
-	tls "github.com/Carcraftz/utls"
 	"net"
 	"net/textproto"
 	"reflect"
 	"time"
 
-	"github.com/davidlinketech/fhttp/internal/nettrace"
+	tls "github.com/katangensis/utls"
+
+	"github.com/katangensis/fhttp/internal/nettrace"
 )
 
 // unique type to prevent assignment.

@@ -15,7 +15,7 @@ import (
 	"compress/gzip"
 	"context"
 	"crypto/rand"
-	tls "github.com/Carcraftz/utls"
+	tls "github.com/katangensis/utls"
 	"crypto/x509"
 	"encoding/binary"
 	"errors"
@@ -38,12 +38,12 @@ import (
 	"testing/iotest"
 	"time"
 
-	. "github.com/davidlinketech/fhttp"
-	"github.com/davidlinketech/fhttp/httptest"
-	"github.com/davidlinketech/fhttp/httptrace"
-	"github.com/davidlinketech/fhttp/httputil"
-	"github.com/davidlinketech/fhttp/internal"
-	"github.com/davidlinketech/fhttp/internal/nettrace"
+	. "github.com/katangensis/fhttp"
+	"github.com/katangensis/fhttp/httptest"
+	"github.com/katangensis/fhttp/httptrace"
+	"github.com/katangensis/fhttp/httputil"
+	"github.com/katangensis/fhttp/internal"
+	"github.com/katangensis/fhttp/internal/nettrace"
 
 	"golang.org/x/net/http/httpguts"
 )

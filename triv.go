@@ -18,7 +18,7 @@ import (
 	"strconv"
 	"sync"
 
-	http "github.com/Carcraftz/fhttp"
+	http "github.com/katangensis/fhttp"
 )
 
 // hello world, the web server

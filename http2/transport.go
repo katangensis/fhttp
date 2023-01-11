@@ -11,7 +11,6 @@ import (
 	"bytes"
 	"context"
 	"crypto/rand"
-	tls "github.com/Carcraftz/utls"
 	"errors"
 	"fmt"
 	"io"
@@ -28,10 +27,12 @@ import (
 	"sync/atomic"
 	"time"
 
-	http "github.com/davidlinketech/fhttp"
-	"github.com/davidlinketech/fhttp/httptrace"
+	tls "github.com/katangensis/utls"
 
-	"github.com/davidlinketech/fhttp/http2/hpack"
+	http "github.com/katangensis/fhttp"
+	"github.com/katangensis/fhttp/httptrace"
+
+	"github.com/katangensis/fhttp/http2/hpack"
 	"golang.org/x/net/http/httpguts"
 	"golang.org/x/net/idna"
 )
@@ -682,7 +683,7 @@ func (t *Transport) NewClientConn(c net.Conn) (*ClientConn, error) {
 	return t.newClientConn(c, "", t.disableKeepAlives())
 }
 
-//wichtig
+// wichtig
 func (t *Transport) newClientConn(c net.Conn, addr string, singleUse bool) (*ClientConn, error) {
 	cc := &ClientConn{
 		t:                     t,
@@ -706,7 +707,7 @@ func (t *Transport) newClientConn(c net.Conn, addr string, singleUse bool) (*Cli
 	if VerboseLogs {
 		t.vlogf("http2: Transport creating client conn %p to %v", cc, c.RemoteAddr())
 	}
-	
+
 	cc.cond = sync.NewCond(&cc.mu)
 	cc.flow.add(int32(initialWindowSize))
 
@@ -738,7 +739,7 @@ func (t *Transport) newClientConn(c net.Conn, addr string, singleUse bool) (*Cli
 	initialSettings := []Setting{}
 
 	setMaxHeader := false
-	
+
 	if t.Settings != nil {
 		for _, setting := range t.Settings {
 			if setting.ID == SettingMaxHeaderListSize {
@@ -763,7 +764,7 @@ func (t *Transport) newClientConn(c net.Conn, addr string, singleUse bool) (*Cli
 	if max := t.maxHeaderListSize(); max != 0 && !setMaxHeader {
 		initialSettings = append(initialSettings, Setting{ID: SettingMaxHeaderListSize, Val: max})
 	}
-	
+
 	cc.bw.Write(clientPreface)
 	cc.fr.WriteSettings(initialSettings...)
 	cc.fr.WriteWindowUpdate(0, transportDefaultConnFlow)
@@ -1314,7 +1315,7 @@ func (cc *ClientConn) awaitOpenSlotForRequest(req *http.Request) error {
 	}
 }
 
-//wichtig
+// wichtig
 // requires cc.wmu be held
 func (cc *ClientConn) writeHeaders(streamID uint32, endStream bool, maxFrameSize int, hdrs []byte) error {
 	first := true // first frame written (HEADERS is first, then CONTINUATION)
@@ -1331,7 +1332,7 @@ func (cc *ClientConn) writeHeaders(streamID uint32, endStream bool, maxFrameSize
 				BlockFragment: chunk,
 				EndStream:     endStream,
 				EndHeaders:    endHeaders,
-				Priority:  PriorityParam{
+				Priority: PriorityParam{
 					StreamDep: 0,
 					Exclusive: true,
 					Weight:    255,
@@ -2006,7 +2007,7 @@ func (rl *clientConnReadLoop) run() error {
 			err = rl.processResetStream(f)
 			maybeIdle = true
 		//case *SettingsFrame:
-			//err = rl.processSettings(f)
+		//err = rl.processSettings(f)
 		case *MetaPushPromiseFrame:
 			cc.vlogf("http2: handling push promise frame")
 			err = rl.processPushPromise(f)
@@ -2474,7 +2475,7 @@ func (rl *clientConnReadLoop) processGoAway(f *GoAwayFrame) error {
 	return nil
 }
 
-//wichtig
+// wichtig
 func (rl *clientConnReadLoop) processSettings(f *SettingsFrame) error {
 	cc := rl.cc
 	cc.mu.Lock()

@@ -14,7 +14,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/davidlinketech/fhttp/http2/hpack"
+	"github.com/katangensis/fhttp/http2/hpack"
 	"golang.org/x/net/http/httpguts"
 )
 
@@ -336,7 +336,7 @@ func (fr *Framer) maxHeaderListSize() uint32 {
 	return fr.MaxHeaderListSize
 }
 
-//wichtig
+// wichtig
 func (f *Framer) startWrite(ftype FrameType, flags Flags, streamID uint32) {
 	// Write the FrameHeader.
 	f.wbuf = append(f.wbuf[:0],
@@ -1067,7 +1067,7 @@ type HeadersFrameParam struct {
 //
 // It will perform exactly one Write to the underlying Writer.
 // It is the caller's responsibility to not call other Write methods concurrently.
-//wichtig
+// wichtig
 func (f *Framer) WriteHeaders(p HeadersFrameParam) error {
 	if !validStreamID(p.StreamID) && !f.AllowIllegalWrites {
 		return errStreamID
@@ -1111,7 +1111,8 @@ type PriorityFrame struct {
 	FrameHeader
 	PriorityParam
 }
-//wichtig
+
+// wichtig
 // PriorityParam are the stream prioritzation parameters.
 type PriorityParam struct {
 	// StreamDep is a 31-bit stream identifier for the
@@ -1158,7 +1159,7 @@ func parsePriorityFrame(_ *frameCache, fh FrameHeader, payload []byte) (Frame, e
 //
 // It will perform exactly one Write to the underlying Writer.
 // It is the caller's responsibility to not call other Write methods concurrently.
-//wichtig
+// wichtig
 func (f *Framer) WritePriority(streamID uint32, p PriorityParam) error {
 	if !validStreamID(streamID) && !f.AllowIllegalWrites {
 		return errStreamID
